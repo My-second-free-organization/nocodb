@@ -82,6 +82,7 @@ export enum PlanFeatureTypes {
   FEATURE_UUID_FIELD = 'feature_uuid_field',
   FEATURE_RECORD_TEMPLATES = 'feature_record_templates',
   FEATURE_RLS = 'feature_rls',
+  FEATURE_API_COMMENT_V3 = 'feature_api_comment_v3',
 }
 
 export enum PlanTitles {
@@ -311,6 +312,7 @@ export const PlanFeatureUpgradeMessages: Record<PlanFeatureTypes, string> = {
   [PlanFeatureTypes.FEATURE_UUID_FIELD]: 'to use UUID fields.',
   [PlanFeatureTypes.FEATURE_RECORD_TEMPLATES]: 'to use record templates.',
   [PlanFeatureTypes.FEATURE_RLS]: 'to use row-level security.',
+  [PlanFeatureTypes.FEATURE_API_COMMENT_V3]: 'to use comment api.',
 };
 
 export const getUpgradeMessage = (

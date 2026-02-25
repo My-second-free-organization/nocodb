@@ -19,7 +19,8 @@
         "Fields",
         "View Filters",
         "View Sorts",
-        "Scripts"
+        "Scripts",
+        "Comments"
       ]
     },
     {
@@ -3880,7 +3881,9 @@
           {
             "schema": {
               "type": "string",
-              "enum": ["true"]
+              "enum": [
+                "true"
+              ]
             },
             "name": "linksAsLtar",
             "in": "query",
@@ -4297,7 +4300,9 @@
           {
             "schema": {
               "type": "string",
-              "enum": ["true"]
+              "enum": [
+                "true"
+              ]
             },
             "name": "linksAsLtar",
             "in": "query",
@@ -5764,6 +5769,387 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedV3"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenV3"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundV3"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerErrorV3"
+          }
+        }
+      }
+    },
+    "/api/v3/meta/bases/{baseId}/tables/{tableId}/records/{rowId}/comments": {
+      "get": {
+        "summary": "List comments",
+        "operationId": "comments-list",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Retrieve all comments for a specific record.\n\n**Note**: Comment APIs are available only on self-hosted and cloud-hosted **Enterprise** plans.",
+        "parameters": [
+          {
+            "name": "baseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the base."
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the table."
+          },
+          {
+            "name": "rowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the record/row."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comments retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedV3"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenV3"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundV3"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerErrorV3"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create comment",
+        "operationId": "comments-create",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Create a new comment on a record.\n\n**Note**: Comment APIs are available only on self-hosted and cloud-hosted **Enterprise** plans.",
+        "parameters": [
+          {
+            "name": "baseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the base."
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the table."
+          },
+          {
+            "name": "rowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the record/row."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comment created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedV3"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenV3"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundV3"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerErrorV3"
+          }
+        }
+      }
+    },
+    "/api/v3/meta/bases/{baseId}/comment/{commentId}": {
+      "patch": {
+        "summary": "Update comment",
+        "operationId": "comments-update",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Update the text of an existing comment. Only the comment creator can update.\n\n**Note**: Comment APIs are available only on self-hosted and cloud-hosted **Enterprise** plans.",
+        "parameters": [
+          {
+            "name": "baseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the base."
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the comment."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comment updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedV3"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenV3"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundV3"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerErrorV3"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete comment",
+        "operationId": "comments-delete",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Soft-delete a comment. Only the comment creator can delete.\n\n**Note**: Comment APIs are available only on self-hosted and cloud-hosted **Enterprise** plans.",
+        "parameters": [
+          {
+            "name": "baseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the base."
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the comment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedV3"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenV3"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundV3"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerErrorV3"
+          }
+        }
+      }
+    },
+    "/api/v3/meta/bases/{baseId}/comment/{commentId}/resolve": {
+      "post": {
+        "summary": "Resolve comment",
+        "operationId": "comments-resolve",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Toggle the resolved state of a comment. If already resolved, unresolves it.\n\n**Note**: Comment APIs are available only on self-hosted and cloud-hosted **Enterprise** plans.",
+        "parameters": [
+          {
+            "name": "baseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the base."
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the comment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment resolved/unresolved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedV3"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenV3"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundV3"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerErrorV3"
+          }
+        }
+      }
+    },
+    "/api/v3/meta/bases/{baseId}/tables/{tableId}/comments/count": {
+      "get": {
+        "summary": "Count comments",
+        "operationId": "comments-count",
+        "tags": [
+          "Comments"
+        ],
+        "description": "Get comment counts for multiple records in a table.\n\n**Note**: Comment APIs are available only on self-hosted and cloud-hosted **Enterprise** plans.",
+        "parameters": [
+          {
+            "name": "baseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the base."
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the table."
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Array of row IDs to count comments for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment counts retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentCountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedV3"
@@ -8089,7 +8475,8 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/FieldBase"
-          },{
+          },
+          {
             "type": "object",
             "properties": {
               "type": {
@@ -11093,6 +11480,128 @@
             ]
           }
         ]
+      },
+      "Comment": {
+        "type": "object",
+        "description": "A comment on a record.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique comment ID.",
+            "example": "cmt_abc123"
+          },
+          "row_id": {
+            "type": "string",
+            "description": "Row/record ID this comment belongs to.",
+            "example": "1"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comment text (supports markdown).",
+            "example": "This is a comment",
+            "maxLength": 3000
+          },
+          "created_by": {
+            "type": "string",
+            "description": "User ID of the comment creator.",
+            "example": "usr_abc123"
+          },
+          "resolved_by": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "User ID who resolved this comment (null if not resolved).",
+            "example": null
+          },
+          "parent_comment_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Parent comment ID for threaded comments.",
+            "example": null
+          },
+          "is_deleted": {
+            "type": "boolean",
+            "description": "Whether the comment is soft-deleted.",
+            "example": false
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp.",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update timestamp.",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        }
+      },
+      "CommentCreateRequest": {
+        "type": "object",
+        "description": "Request body for creating a comment.",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "description": "Comment text (supports markdown).",
+            "example": "This is a comment",
+            "maxLength": 3000
+          }
+        }
+      },
+      "CommentUpdateRequest": {
+        "type": "object",
+        "description": "Request body for updating a comment.",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "description": "Updated comment text.",
+            "example": "Updated comment",
+            "maxLength": 3000
+          }
+        }
+      },
+      "CommentListResponse": {
+        "type": "object",
+        "description": "List of comments for a record.",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        },
+        "required": [
+          "list"
+        ]
+      },
+      "CommentCountResponse": {
+        "type": "array",
+        "description": "Comment counts per row.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "string",
+              "description": "Number of comments.",
+              "example": "4"
+            },
+            "row_id": {
+              "type": "string",
+              "description": "Row ID.",
+              "example": "1"
+            }
+          },
+          "required": [
+            "count",
+            "row_id"
+          ]
+        }
       }
     },
     "responses": {
