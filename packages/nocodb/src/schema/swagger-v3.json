@@ -2552,7 +2552,15 @@
                       "type": "URL",
                       "payload": {
                         "path": "https://example.com/webhook",
-                        "method": "POST"
+                        "method": "POST",
+                        "body": "{{ json data }}",
+                        "headers": [
+                          {
+                            "name": "Content-Type",
+                            "value": "application/json",
+                            "enabled": true
+                          }
+                        ]
                       }
                     },
                     "active": true
@@ -2582,7 +2590,15 @@
                         "type": "URL",
                         "payload": {
                           "path": "https://example.com/webhook",
-                          "method": "POST"
+                          "method": "POST",
+                          "body": "{{ json data }}",
+                          "headers": [
+                            {
+                              "name": "Content-Type",
+                              "value": "application/json",
+                              "enabled": true
+                            }
+                          ]
                         }
                       },
                       "active": true,
@@ -2719,6 +2735,25 @@
                   "value": {
                     "active": false
                   }
+                },
+                "Update Notification Payload": {
+                  "value": {
+                    "notification": {
+                      "type": "URL",
+                      "payload": {
+                        "path": "https://example.com/webhook",
+                        "method": "POST",
+                        "body": "{{ json data }}",
+                        "headers": [
+                          {
+                            "name": "Content-Type",
+                            "value": "application/json",
+                            "enabled": true
+                          }
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2743,7 +2778,16 @@
                       "notification": {
                         "type": "URL",
                         "payload": {
-                          "path": "https://example.com/webhook"
+                          "path": "https://example.com/webhook",
+                          "method": "POST",
+                          "body": "{{ json data }}",
+                          "headers": [
+                            {
+                              "name": "Content-Type",
+                              "value": "application/json",
+                              "enabled": true
+                            }
+                          ]
                         }
                       },
                       "active": true,
