@@ -69,7 +69,7 @@ const columns = computed(() => {
 
 const customRow = (base: Record<string, any>) => ({
   onClick: () => {
-    navigateTo(`/#/nc/${base.workspace_id}/${base.id}`)
+    navigateTo(`/nc/${base.workspace_id}/${base.id}`)
   },
 })
 
